@@ -1,141 +1,179 @@
 <!doctype html>
 <html lang="en" class="h-full">
- <head>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IndWater - Premium Drinking Water Supplier</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <script src="/_sdk/element_sdk.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&amp;family=Lexend:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     html, body { height: 100%; margin: 0; }
+
+    :root {
+      --accent: #4a90e2;
+      --accent-bright: #60a5fa;
+      --accent-dim: rgba(74,144,226,0.15);
+      --text: #f5f7fa;
+      --text-muted: rgba(245,247,250,0.5);
+      --text-faint: rgba(245,247,250,0.3);
+      --bg: #0a0f1a;
+      --bg2: #111827;
+      --glass: rgba(255,255,255,0.05);
+      --glass-border: rgba(255,255,255,0.08);
+    }
+
     .glass {
-      background: rgba(255,255,255,0.06);
+      background: var(--glass);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid var(--glass-border);
     }
     .glass-strong {
-      background: rgba(255,255,255,0.1);
+      background: rgba(10,15,26,0.8);
       backdrop-filter: blur(30px);
       -webkit-backdrop-filter: blur(30px);
-      border: 1px solid rgba(255,255,255,0.15);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
     .glass-card {
-      background: rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.03);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid var(--glass-border);
       transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     }
     .glass-card:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.15);
       transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     }
+
+    /* Pricing cards */
     .pricing-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
       backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.09);
       transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
       position: relative;
+      overflow: hidden;
     }
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(74,144,226,0.4), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .pricing-card:hover::before { opacity: 1; }
     .pricing-card:hover {
-      transform: translateY(-12px);
-      background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
-      border-color: rgba(255,255,255,0.2);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+      transform: translateY(-14px);
+      background: linear-gradient(145deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.5), 0 0 40px rgba(74,144,226,0.05);
     }
-    .pricing-card.premium {
-      border-color: #4a90e2;
-      box-shadow: 0 0 20px rgba(74, 144, 226, 0.1);
+    .pricing-card.featured {
+      border-color: rgba(74,144,226,0.5);
+      background: linear-gradient(145deg, rgba(74,144,226,0.1), rgba(74,144,226,0.02));
+      box-shadow: 0 0 30px rgba(74,144,226,0.12), inset 0 0 30px rgba(74,144,226,0.03);
     }
-    .pricing-card.premium:hover {
-      box-shadow: 0 30px 80px rgba(74, 144, 226, 0.2);
+    .pricing-card.featured:hover {
+      box-shadow: 0 30px 80px rgba(74,144,226,0.2), 0 0 50px rgba(74,144,226,0.1);
     }
+
+    /* Orbs */
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.3;
-      animation: float 12s ease-in-out infinite;
+      filter: blur(100px);
+      opacity: 0.2;
+      animation: float 14s ease-in-out infinite;
+      pointer-events: none;
     }
     @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -20px) scale(1.05); }
-      66% { transform: translate(-20px, 15px) scale(0.95); }
+      0%, 100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(25px,-18px) scale(1.04); }
+      66% { transform: translate(-18px,12px) scale(0.96); }
     }
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(28px); }
       to { opacity: 1; transform: translateY(0); }
     }
     @keyframes slideIn {
-      from { opacity: 0; transform: translateX(-30px); }
+      from { opacity: 0; transform: translateX(-28px); }
       to { opacity: 1; transform: translateX(0); }
     }
     @keyframes pulse-soft {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.02); opacity: 0.8; }
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(74,144,226,0.3); }
+      50% { transform: scale(1.02); box-shadow: 0 0 20px 4px rgba(74,144,226,0.15); }
     }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
     .anim-up { animation: fadeUp 0.8s ease-out forwards; opacity: 0; }
     .anim-slide { animation: slideIn 0.8s ease-out forwards; opacity: 0; }
-    .pulse-btn { animation: pulse-soft 2s ease-in-out infinite; }
+    .pulse-btn { animation: pulse-soft 2.5s ease-in-out infinite; }
     .anim-d1 { animation-delay: 0.1s; }
     .anim-d2 { animation-delay: 0.25s; }
     .anim-d3 { animation-delay: 0.4s; }
     .anim-d4 { animation-delay: 0.55s; }
     .anim-d5 { animation-delay: 0.7s; }
     .anim-d6 { animation-delay: 0.85s; }
-    .bottle-svg {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-    }
+
     .shimmer {
       background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.06) 50%, transparent 60%);
       background-size: 200% 100%;
       animation: shimmer 3s ease-in-out infinite;
     }
-    @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
+
+    /* Badge dot */
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+      animation: glow-pulse 2s ease-in-out infinite;
+      box-shadow: 0 0 6px var(--accent);
     }
+
     .scroll-wrap { overflow-y: auto; overflow-x: hidden; scroll-behavior: smooth; }
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-thumb { background: rgba(74,144,226,0.3); border-radius: 2px; }
+
     .form-input {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.09);
       backdrop-filter: blur(10px);
       color: #f5f7fa;
       padding: 0.875rem 1.25rem;
       border-radius: 0.75rem;
       transition: all 0.3s ease;
       font-family: 'Montserrat', sans-serif;
+      width: 100%;
     }
     .form-input:focus {
       outline: none;
-      background: rgba(255,255,255,0.08);
-      border-color: #4a90e2;
-      box-shadow: 0 0 15px rgba(74, 144, 226, 0.2);
+      background: rgba(74,144,226,0.06);
+      border-color: rgba(74,144,226,0.5);
+      box-shadow: 0 0 20px rgba(74,144,226,0.15);
     }
-    .form-input::placeholder {
-      color: rgba(245, 247, 250, 0.4);
-    }
-    .form-input option {
-      background: #1a1f2e;
-      color: #f5f7fa;
-    }
-    .form-input option:checked {
-      background: #4a90e2;
-      color: #f5f7fa;
-    }
-    .btn-whatsapp {
-      background: linear-gradient(135deg, #25D366, #20BA5C);
+    .form-input::placeholder { color: rgba(245,247,250,0.3); }
+    .form-input option { background: #111827; color: #f5f7fa; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4a90e2, #2563eb);
       color: white;
-      padding: 0.875rem 2.5rem;
+      padding: 0.9rem 2rem;
       border-radius: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.05em;
@@ -146,218 +184,505 @@
       align-items: center;
       gap: 0.75rem;
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(74,144,226,0.4);
+    }
+
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25D366, #1aab54);
+      color: white;
+      padding: 0.9rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-family: 'Montserrat', sans-serif;
     }
     .btn-whatsapp:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(37,211,102,0.35);
     }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      padding: 0.9rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 1px solid rgba(74,144,226,0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .btn-outline:hover {
+      background: rgba(74,144,226,0.1);
+      border-color: rgba(74,144,226,0.6);
+    }
+
+    /* Feature chips */
+    .feature-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: rgba(245,247,250,0.7);
+      padding: 0.4rem 0;
+    }
+    .feature-chip .check-icon {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: rgba(74,144,226,0.15);
+      border: 1px solid rgba(74,144,226,0.3);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Divider line */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      margin: 2rem 0;
+    }
+
+    /* Section label */
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::before, .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(74,144,226,0.4));
+    }
+    .section-label::after {
+      background: linear-gradient(90deg, rgba(74,144,226,0.4), transparent);
+    }
+
+    /* Noise texture overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.5;
+    }
+
+    /* Stats */
+    .stat-card {
+      text-align: center;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.3s ease;
+    }
+    .stat-card:hover {
+      background: rgba(74,144,226,0.06);
+      border-color: rgba(74,144,226,0.2);
+    }
+
+    /* Toast */
     .toast-msg {
       position: fixed;
       bottom: 1.5rem;
       left: 50%;
-      transform: translate(-50%, 50px);
-      z-index: 50;
-      background: rgba(37, 211, 102, 0.9);
+      transform: translate(-50%, 60px);
+      z-index: 9999;
       color: white;
-      padding: 1rem 1.5rem;
+      padding: 1rem 1.75rem;
       border-radius: 0.75rem;
       backdrop-filter: blur(10px);
       opacity: 0;
-      transition: all 0.4s ease;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
       pointer-events: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
     }
     .toast-msg.show {
       opacity: 1;
       transform: translate(-50%, 0);
     }
-  </style>
-  <style>body { box-sizing: border-box; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
- </head>
- <body class="h-full" style="font-family: 'Montserrat', sans-serif; background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%); color: #f5f7fa;">
-  <div id="app" class="h-full w-full scroll-wrap relative"><!-- Orbs -->
-   <div class="orb" style="width:500px;height:500px;top:-10%;left:-8%;background:#2563eb;animation-duration:14s;"></div>
-   <div class="orb" style="width:400px;height:400px;top:30%;right:-5%;background:#1e3a8a;animation-duration:18s;animation-delay:-4s;"></div>
-   <div class="orb" style="width:300px;height:300px;bottom:10%;left:20%;background:#0c4a6e;animation-duration:16s;animation-delay:-8s;"></div><!-- Nav -->
-   <nav class="glass-strong fixed top-0 left-0 w-full z-50 anim-up anim-d1">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-     <div class="flex items-center gap-3">
-      <div style="width:32px;height:32px;">
-       <svg viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="12" stroke="#4a90e2" stroke-width="1.5" opacity="0.8" /> <path d="M16 8 L16 24 M8 16 L24 16" stroke="#4a90e2" stroke-width="1.5" opacity="0.8" />
-       </svg>
-      </div><span style="font-weight:600;font-size:1.2rem;letter-spacing:0.12em;color:#4a90e2;">INDWATER</span>
-     </div>
-     <div class="hidden md:flex items-center gap-8 text-xs tracking-widest uppercase" style="color:rgba(245,247,250,0.5);font-weight:400;"><a href="#pricing" class="hover:text-white transition-colors duration-300 cursor-pointer">Pricing</a> <a href="#order" class="hover:text-white transition-colors duration-300 cursor-pointer">Order</a> <a href="#contact" class="hover:text-white transition-colors duration-300 cursor-pointer">Contact</a>
-     </div><a href="https://wa.me/919327802068?text=Hello%20IndWater!%20I%20would%20like%20to%20know%20more%20about%20your%20water%20bottles." target="_blank" rel="noopener noreferrer" class="btn-whatsapp" style="padding:0.5rem 1.5rem;font-size:0.85rem;"> <i data-lucide="phone" style="width:14px;height:14px;"></i> WhatsApp </a>
-    </div>
-   </nav><!-- Hero -->
-   <header class="relative w-full flex items-center justify-center" style="min-height:100%;padding-top:100px;">
-    <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
-     <p class="anim-up anim-d2 text-xs tracking-[0.4em] uppercase mb-6" style="color:#4a90e2;font-weight:500;">Pure Water • Fast Delivery • Nationwide</p>
-     <h1 id="hero-title" class="anim-up anim-d3" style="font-family:'Lexend',sans-serif;font-weight:600;font-size:clamp(2.5rem,7vw,5rem);line-height:1.1;letter-spacing:-0.01em;color:#f5f7fa;">Experience Pure<br><span style="color:#4a90e2;">Bottled Perfection</span></h1>
-     <p id="hero-subtitle" class="anim-up anim-d4 mt-6 mx-auto text-base" style="max-width:540px;color:rgba(245,247,250,0.6);font-weight:400;line-height:1.8;">Premium packaged drinking water delivered straight to your doorstep. Choose your plan, place your order, and enjoy pristine hydration.</p>
-     <div class="anim-up anim-d5 mt-10 flex items-center justify-center gap-4 flex-wrap"><a href="#pricing" class="group relative px-8 py-3.5 rounded-full text-sm tracking-wider uppercase overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-lg" style="background:linear-gradient(135deg, #4a90e2, #2563eb);color:white;font-weight:600;text-decoration:none;display:inline-block;"> <span class="relative z-10">View Pricing</span> </a> <a href="#order" class="glass px-8 py-3.5 rounded-full text-sm tracking-wider uppercase cursor-pointer hover:bg-white/10 transition-all duration-300" style="color:rgba(245,247,250,0.8);font-weight:500;text-decoration:none;display:inline-block;"> Order Now </a>
-     </div><!-- Stats -->
-     <div class="anim-up anim-d6 mt-20 grid grid-cols-3 gap-6 max-w-lg mx-auto">
-      <div class="text-center">
-       <div style="font-family:'Lexend',sans-serif;font-size:2rem;color:#4a90e2;font-weight:600;">
-        99.9%
-       </div>
-       <div class="text-xs uppercase tracking-widest mt-1" style="color:rgba(245,247,250,0.35);font-weight:300;">
-        Pure
-       </div>
-      </div>
-      <div class="text-center">
-       <div style="font-family:'Lexend',sans-serif;font-size:2rem;color:#4a90e2;font-weight:600;">
-        24/7
-       </div>
-       <div class="text-xs uppercase tracking-widest mt-1" style="color:rgba(245,247,250,0.35);font-weight:300;">
-        Support
-       </div>
-      </div>
-      <div class="text-center">
-       <div style="font-family:'Lexend',sans-serif;font-size:2rem;color:#4a90e2;font-weight:600;">
-        Ahmedabad
-       </div>
-       <div class="text-xs uppercase tracking-widest mt-1" style="color:rgba(245,247,250,0.35);font-weight:300;">
-        Area Delivery
-       </div>
-      </div>
-     </div>
-    </div>
-   </header><!-- Pricing Section -->
-   <section id="pricing" class="relative w-full py-28 px-6 z-10">
-    <div class="max-w-6xl mx-auto">
-     <div class="text-center mb-16">
-      <p class="text-xs tracking-[0.3em] uppercase mb-3" style="color:#4a90e2;font-weight:500;">Choose Your Pack</p>
-      <h2 id="collection-title" style="font-family:'Lexend',sans-serif;font-weight:600;font-size:clamp(2rem,4vw,3.2rem);color:#f5f7fa;">Flexible Pricing Plans</h2>
-      <p class="mt-4" style="color:rgba(245,247,250,0.5);max-width:520px;margin-left:auto;margin-right:auto;font-weight:400;">Each box contains 24 premium bottles. Select your plan and bulk up your hydration routine.</p>
-     </div>
-     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"><!-- Daily Pack Card -->
-      <div class="pricing-card rounded-2xl overflow-hidden p-8 anim-up anim-d2">
-       <div class="flex items-center justify-between mb-6">
-        <div>
-         <p class="text-xs tracking-widest uppercase mb-1" style="color:rgba(245,247,250,0.5);font-weight:400;">Budget Friendly</p>
-         <h3 id="daily-title" style="font-family:'Lexend',sans-serif;font-size:1.5rem;font-weight:600;color:#f5f7fa;">The Daily Pack</h3>
-        </div>
-        <svg viewbox="0 0 40 60" width="35" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="12" y="8" width="16" height="35" rx="2" stroke="#4a90e2" stroke-width="1.2" opacity="0.6" /> <path d="M14 43 L14 52 Q14 56 20 56 Q26 56 26 52 L26 43" stroke="#4a90e2" stroke-width="1.2" opacity="0.6" />
-        </svg>
-       </div>
-       <div class="mb-8">
-        <span style="font-family:'Lexend',sans-serif;font-size:2.5rem;font-weight:700;color:#4a90e2;">₹10</span><span style="color:rgba(245,247,250,0.5);font-weight:400;margin-left:0.5rem;font-size:0.9rem;">per bottle</span>
-        <p style="color:rgba(245,247,250,0.4);font-size:0.85rem;margin-top:0.5rem;font-weight:300;">24 bottles per box</p>
-       </div>
-       <ul class="space-y-3 mb-8">
-        <li class="flex items-center gap-2 text-sm" style="color:rgba(245,247,250,0.7);"><i data-lucide="check" style="width:16px;height:16px;color:#4a90e2;flex-shrink:0;"></i> 24 Bottles Per Box</li>
-        <li class="flex items-center gap-2 text-sm" style="color:rgba(245,247,250,0.7);"><i data-lucide="check" style="width:16px;height:16px;color:#4a90e2;flex-shrink:0;"></i> Hygienic Packaging</li>
-        <li class="flex items-center gap-2 text-sm" style="color:rgba(245,247,250,0.7);"><i data-lucide="check" style="width:16px;height:16px;color:#4a90e2;flex-shrink:0;"></i> Fast Delivery</li>
-        <li class="flex items-center gap-2 text-sm" style="color:rgba(245,247,250,0.7);"><i data-lucide="check" style="width:16px;height:16px;color:#4a90e2;flex-shrink:0;"></i> Easy Ordering</li>
-       </ul><button onclick="selectPack('Daily', 10)" class="w-full glass px-4 py-2.5 rounded-lg text-sm font-600 uppercase tracking-wide hover:bg-white/10 transition-all duration-300 cursor-pointer" style="color:#4a90e2;border:1px solid rgba(74, 144, 226, 0.3);">Select Plan</button>
-      </div><!-- Premium Pack Card -->
-      <div class="pricing-card premium rounded-2xl overflow-hidden p-8 anim-up anim-d3 transform lg:scale-105">
-       <div class="absolute top-4 right-4 glass rounded-full px-3 py-1 text-xs" style="color:#4a90e2;font-weight:600;background:rgba(74, 144, 226, 0.1);border:1px solid rgba(74, 144, 226, 0.3);">
-        MOST POPULAR
-       </div>
-       <div class="flex items-center justify-between mb-6">
-        <div>
-         <p class="text-xs tracking-widest uppercase mb-1" style="color:#4a90e2;font-weight:500;">Best Value</p>
-         <h3 id="premium-title" style="font-family:'Lexend',sans-serif;font-size:1.5rem;font-weight:600;color:#f5f7fa;">The Premium Pack</h3>
-        </div>
-        <svg viewbox="0 0 40 60" width="35" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="6" width="20" height="38" rx="2" stroke="#4a90e2" stroke-width="1.2" /> <path d="M12 44 L12 53 Q12 57 20 57 Q28 57 28 53 L28 44" stroke="#4a90e2" stroke-width="1.2" /> <ellipse cx="20" cy="25" rx="6" ry="8" stroke="#4a90e2" stroke-width="0.8" opacity="0.4" />
-        </svg>
-       </div>
-       <div class="mb-8">
-        <span style="font-family:'Lexend',sans-serif;font-size:2.5rem;font-weight:700;color:#4a90e2;">₹20</span><span style="color:rgba(245,247,250,0.5);font-weight:400;margin-left:0.5rem;font-size:0.9rem;">per bottle</span>
-        <p style="color:rgba(245,247,250,0.4);font-size:0.85rem;margin-top:0.5rem;font-weight:300;">24 bottles per box</p>
-       </div>
-       <ul class="space-y-3 mb-8">
-        <li class="flex items-center gap-2 text-sm" style="color:rgba(245,247,250,0.7);"><i data-lucide="check" style="width:16px;height:16px;color:#4a90e2;flex-shrink:0;"></i> 24 Bottles Per Box</li>
-        <li class="flex items-center gap-2 text-sm" style="color:rgba(245,247,250,0.7);"><i data-lucide="check" style="width:16px;height:16px;color:#4a90e2;flex-shrink:0;"></i> Quality Filtered</li>
-        <li class="flex items-center gap-2 text-sm" style="color:rgba(245,247,250,0.7);"><i data-lucide="check" style="width:16px;height:16px;color:#4a90e2;flex-shrink:0;"></i> Priority Delivery</li>
-        <li class="flex items-center gap-2 text-sm" style="color:rgba(245,247,250,0.7);"><i data-lucide="check" style="width:16px;height:16px;color:#4a90e2;flex-shrink:0;"></i> Reliable Service</li>
-       </ul><button onclick="selectPack('Premium', 20)" class="w-full pulse-btn px-4 py-2.5 rounded-lg text-sm font-600 uppercase tracking-wide transition-all duration-300 cursor-pointer" style="background:linear-gradient(135deg, #4a90e2, #2563eb);color:white;border:none;">Select Plan</button>
-      </div><!-- Luxury Pack Card -->
-      <div class="pricing-card rounded-2xl overflow-hidden p-8 anim-up anim-d4">
-       <div class="flex items-center justify-between mb-6">
-        <div>
-         <p class="text-xs tracking-widest uppercase mb-1" style="color:rgba(245,247,250,0.5);font-weight:400;">Premium Choice</p>
-         <h3 id="luxury-title" style="font-family:'Lexend',sans-serif;font-size:1.5rem;font-weight:600;color:#f5f7fa;">The Luxury Pack</h3>
-        </div>
-        <svg viewbox="0 0 40 60" width="35" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="6" width="20" height="38" rx="3" stroke="#4a90e2" stroke-width="1.2" /> <path d="M12 44 L12 53 Q12 57 20 57 Q28 57 28 53 L28 44" stroke="#4a90e2" stroke-width="1.2" /> <line x1="14" y1="30" x2="26" y2="30" stroke="#4a90e2" stroke-width="0.8" opacity="0.5" /> <line x1="14" y1="38" x2="26" y2="38" stroke="#4a90e2" stroke-width="0.8" opacity="0.5" />
-        </svg>
-       </div>
-       <div class="mb-8">
-        <span style="font-family:'Lexend',sans-serif;font-size:2.5rem;font-weight:700;color:#4a90e2;">₹50</span><span style="color:rgba(245,247,250,0.5);font-weight:400;margin-left:0.5rem;font-size:0.9rem;">per bottle</span>
-        <p style="color:rgba(245,247,250,0.4);font-size:0.85rem;margin-top:0.5rem;font-weight:300;">24 bottles per box</p>
-       </div>
-       <ul class="space-y-3 mb-8">
-        <li class="flex items-center gap-2 text-sm" style="color:rgba(245,247,250,0.7);"><i data-lucide="check" style="width:16px;height:16px;color:#4a90e2;flex-shrink:0;"></i> 24 Bottles Per Box</li>
-        <li class="flex items-center gap-2 text-sm" style="color:rgba(245,247,250,0.7);"><i data-lucide="check" style="width:16px;height:16px;color:#4a90e2;flex-shrink:0;"></i> Maximum Purity</li>
-        <li class="flex items-center gap-2 text-sm" style="color:rgba(245,247,250,0.7);"><i data-lucide="check" style="width:16px;height:16px;color:#4a90e2;flex-shrink:0;"></i> Same-Day Delivery</li>
-        <li class="flex items-center gap-2 text-sm" style="color:rgba(245,247,250,0.7);"><i data-lucide="check" style="width:16px;height:16px;color:#4a90e2;flex-shrink:0;"></i> Premium Packaging</li>
-       </ul><button onclick="selectPack('Luxury', 50)" class="w-full glass px-4 py-2.5 rounded-lg text-sm font-600 uppercase tracking-wide hover:bg-white/10 transition-all duration-300 cursor-pointer" style="color:#4a90e2;border:1px solid rgba(74, 144, 226, 0.3);">Select Plan</button>
-      </div>
-     </div>
-    </div>
-   </section><!-- Order Section -->
-   <section id="order" class="relative w-full py-28 px-6 z-10">
-    <div class="max-w-4xl mx-auto glass-strong rounded-3xl p-12 md:p-16">
-     <h2 style="font-family:'Lexend',sans-serif;font-weight:600;font-size:2rem;color:#f5f7fa;margin-bottom:1.5rem;text-center;">Place Your Order</h2>
-     <form id="orderForm" onsubmit="handleOrderSubmit(event)" class="space-y-5">
-      <!-- Bottle Type -->
-      <div>
-       <label style="display:block;font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:rgba(245,247,250,0.7);margin-bottom:0.75rem;">Select Bottle Type</label> <select id="bottleType" name="bottleType" class="form-input w-full" required> <option value="">Choose a pack...</option> <option value="Daily - ₹10/bottle">Daily Pack - ₹10 per bottle</option> <option value="Premium - ₹20/bottle">Premium Pack - ₹20 per bottle</option> <option value="Luxury - ₹50/bottle">Luxury Pack - ₹50 per bottle</option> </select>
-      </div><!-- Number of Boxes -->
-      <div>
-       <label style="display:block;font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:rgba(245,247,250,0.7);margin-bottom:0.75rem;">Number of Boxes</label> <input type="number" id="numBoxes" name="numBoxes" class="form-input w-full" placeholder="Enter quantity" min="1" max="100" required>
-      </div><!-- Full Name -->
-      <div>
-       <label style="display:block;font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:rgba(245,247,250,0.7);margin-bottom:0.75rem;">Full Name</label> <input type="text" id="fullName" name="fullName" class="form-input w-full" placeholder="Your full name" required>
-      </div><!-- Mobile Number -->
-      <div>
-       <label style="display:block;font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:rgba(245,247,250,0.7);margin-bottom:0.75rem;">Mobile Number</label> <input type="tel" id="mobileNum" name="mobileNum" class="form-input w-full" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
-      </div><!-- Delivery Address -->
-      <div>
-       <label style="display:block;font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:rgba(245,247,250,0.7);margin-bottom:0.75rem;">Delivery Address</label> <textarea id="address" name="address" class="form-input w-full" placeholder="Full delivery address" rows="3" required></textarea>
-      </div><!-- Submit Button --> <button type="submit" class="btn-whatsapp w-full justify-center mt-8 pulse-btn"> <i data-lucide="send" style="width:16px;height:16px;"></i> Order via WhatsApp </button>
-     </form>
-    </div>
-   </section><!-- Contact Section -->
-   <section id="contact" class="relative w-full py-16 px-6 z-10" style="border-top:1px solid rgba(255,255,255,0.06);">
-    <div class="max-w-6xl mx-auto">
-     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-8 mb-12">
-      <div class="text-center">
-       <i data-lucide="phone" style="width:32px;height:32px;color:#4a90e2;margin:0 auto 1rem;display:block;"></i>
-       <p class="text-sm font-600 uppercase tracking-wide mb-2" style="color:#f5f7fa;">Call Us</p><a href="tel:+919327802068" class="text-sm" style="color:rgba(245,247,250,0.6);text-decoration:none;hover:color:#4a90e2;transition:color 0.3s;">+91 9327 802 068</a>
-      </div>
-     </div>
-     <div class="flex flex-col md:flex-row items-center justify-between gap-8 pt-8 border-t" style="border-color:rgba(255,255,255,0.06);">
-      <div class="flex items-center gap-2"><span style="font-family:'Lexend',sans-serif;font-weight:600;font-size:1.1rem;letter-spacing:0.1em;color:#4a90e2;">INDWATER</span>
-      </div>
-      <p id="footer-text" class="text-xs" style="color:rgba(245,247,250,0.3);font-weight:300;letter-spacing:0.1em;">© 2025 IndWater - Premium Drinking Water Supplier. All rights reserved.</p>
-      <div class="flex items-center gap-4"><a href="https://wa.me/919327802068" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors cursor-pointer" style="color:rgba(245,247,250,0.35);"><i data-lucide="phone" style="width:18px;height:18px;"></i></a> <a class="hover:text-white transition-colors cursor-pointer" style="color:rgba(245,247,250,0.35);"><i data-lucide="instagram" style="width:18px;height:18px;"></i></a> <a class="hover:text-white transition-colors cursor-pointer" style="color:rgba(245,247,250,0.35);"><i data-lucide="facebook" style="width:18px;height:18px;"></i></a>
-      </div>
-     </div>
-    </div>
-   </section>
-  </div><!-- Toast Notification -->
-  <div id="toast" class="toast-msg">
-   ✓ Order details sent to WhatsApp!
-  </div>
-  <script>
-    let cartCount = 0;
-    let selectedPack = null;
 
+    /* Nav link */
+    .nav-link {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,247,250,0.45);
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .nav-link:hover { color: #f5f7fa; }
+    .nav-link:hover::after { transform: scaleX(1); }
+
+    /* Pack size badge */
+    .size-badge {
+      font-size: 3.2rem;
+      font-family: 'Lexend', sans-serif;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    /* Water drop decorative */
+    .water-drop {
+      display: inline-block;
+      width: 40px; height: 52px;
+      position: relative;
+    }
+
+    textarea.form-input { resize: vertical; min-height: 90px; }
+  </style>
+</head>
+<body style="font-family:'Montserrat',sans-serif; background: linear-gradient(160deg, #080d16 0%, #0f1726 50%, #0a1020 100%); color:#f5f7fa;">
+
+  <!-- Orbs -->
+  <div class="orb" style="width:600px;height:600px;top:-15%;left:-10%;background:radial-gradient(circle,#1d4ed8,transparent);animation-duration:16s;"></div>
+  <div class="orb" style="width:450px;height:450px;top:40%;right:-8%;background:radial-gradient(circle,#1e3a8a,transparent);animation-duration:20s;animation-delay:-5s;"></div>
+  <div class="orb" style="width:350px;height:350px;bottom:5%;left:15%;background:radial-gradient(circle,#0c4a6e,transparent);animation-duration:18s;animation-delay:-9s;"></div>
+
+  <div id="app" class="w-full scroll-wrap relative" style="z-index:2;">
+
+    <!-- NAV -->
+    <nav class="glass-strong fixed top-0 left-0 w-full z-50 anim-up anim-d1">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div style="width:30px;height:30px;position:relative;">
+            <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="15" cy="15" r="13" stroke="#4a90e2" stroke-width="1" opacity="0.5"/>
+              <path d="M15 7 C12 11 9 14 9 18 C9 22 12 24 15 24 C18 24 21 22 21 18 C21 14 18 11 15 7Z" stroke="#4a90e2" stroke-width="1.2" fill="rgba(74,144,226,0.08)"/>
+            </svg>
+          </div>
+          <span style="font-weight:700;font-size:1.15rem;letter-spacing:0.18em;color:#4a90e2;font-family:'Lexend',sans-serif;">INDWATER</span>
+        </div>
+        <div class="hidden md:flex items-center gap-10">
+          <a href="#pricing" class="nav-link">Pricing</a>
+          <a href="#order" class="nav-link">Order</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        <a href="https://wa.me/919327802068?text=Hello%20IndWater!%20I%20would%20like%20to%20know%20more%20about%20your%20water%20bottles." target="_blank" rel="noopener noreferrer" class="btn-whatsapp" style="padding:0.5rem 1.25rem;font-size:0.8rem;">
+          <i data-lucide="phone" style="width:13px;height:13px;"></i> WhatsApp
+        </a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="relative w-full flex items-center justify-center" style="min-height:100vh;padding-top:90px;">
+      <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+
+        <div class="anim-up anim-d2 flex items-center justify-center gap-3 mb-8">
+          <span class="badge-dot"></span>
+          <span style="font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--accent);font-weight:600;">Pure Water · Fast Delivery · Ahmedabad</span>
+          <span class="badge-dot"></span>
+        </div>
+
+        <h1 id="hero-title" class="anim-up anim-d3" style="font-family:'Lexend',sans-serif;font-weight:700;font-size:clamp(2.8rem,8vw,5.5rem);line-height:1.05;letter-spacing:-0.02em;color:#f5f7fa;">
+          Experience Pure<br>
+          <span style="background:linear-gradient(135deg,#60a5fa,#4a90e2,#2563eb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Bottled Perfection</span>
+        </h1>
+
+        <p id="hero-subtitle" class="anim-up anim-d4 mt-6 mx-auto" style="max-width:520px;color:rgba(245,247,250,0.55);font-weight:400;line-height:1.85;font-size:1rem;">
+          Premium packaged drinking water delivered straight to your doorstep. Choose your plan, place your order, and enjoy pristine hydration.
+        </p>
+
+        <div class="anim-up anim-d5 mt-10 flex items-center justify-center gap-4 flex-wrap">
+          <a href="#pricing" class="btn-primary" style="text-decoration:none;">
+            <i data-lucide="layers" style="width:15px;height:15px;"></i> View Pricing
+          </a>
+          <a href="#order" class="btn-outline" style="text-decoration:none;">
+            Order Now
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="anim-up anim-d6 mt-20 grid grid-cols-3 gap-4 max-w-lg mx-auto">
+          <div class="stat-card">
+            <div style="font-family:'Lexend',sans-serif;font-size:1.9rem;color:var(--accent);font-weight:700;">99.9%</div>
+            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(245,247,250,0.35);margin-top:0.4rem;font-weight:400;">Purity</div>
+          </div>
+          <div class="stat-card">
+            <div style="font-family:'Lexend',sans-serif;font-size:1.9rem;color:var(--accent);font-weight:700;">24/7</div>
+            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(245,247,250,0.35);margin-top:0.4rem;font-weight:400;">Support</div>
+          </div>
+          <div class="stat-card">
+            <div style="font-family:'Lexend',sans-serif;font-size:1.3rem;color:var(--accent);font-weight:700;line-height:1.2;">Fast<br>Delivery</div>
+            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(245,247,250,0.35);margin-top:0.4rem;font-weight:400;">Ahmedabad</div>
+          </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="anim-up anim-d6 mt-16 flex flex-col items-center gap-2" style="opacity:0.4;">
+          <span style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;">Scroll</span>
+          <div style="width:1px;height:40px;background:linear-gradient(180deg,var(--accent),transparent);"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="relative w-full py-28 px-6 z-10">
+      <div class="max-w-6xl mx-auto">
+
+        <div class="text-center mb-16">
+          <div class="section-label mb-5 max-w-xs mx-auto">Choose Your Pack</div>
+          <h2 id="collection-title" style="font-family:'Lexend',sans-serif;font-weight:700;font-size:clamp(2rem,4.5vw,3.4rem);color:#f5f7fa;letter-spacing:-0.01em;">Flexible Pricing Plans</h2>
+          <p class="mt-4" style="color:rgba(245,247,250,0.45);max-width:500px;margin-left:auto;margin-right:auto;font-weight:400;line-height:1.8;font-size:0.95rem;">Each box contains 24 premium bottles. Select your plan and elevate your hydration routine.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+
+          <!-- SMALL Pack (was Daily) -->
+          <div class="pricing-card rounded-2xl p-8 anim-up anim-d2">
+            <div class="mb-1">
+              <span style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(245,247,250,0.4);font-weight:500;">Budget Friendly</span>
+            </div>
+            <h3 id="daily-title" style="font-family:'Lexend',sans-serif;font-size:2rem;font-weight:700;color:#f5f7fa;margin-bottom:0.25rem;">Small</h3>
+            <p style="font-size:0.8rem;color:rgba(245,247,250,0.4);margin-bottom:1.75rem;">Perfect for individuals & small families</p>
+
+            <div class="divider"></div>
+
+            <div class="flex items-baseline gap-2 mb-1">
+              <span class="size-badge">₹10</span>
+              <span style="color:rgba(245,247,250,0.4);font-size:0.85rem;">/bottle</span>
+            </div>
+            <p style="font-size:0.78rem;color:rgba(245,247,250,0.35);margin-bottom:2rem;">₹240 total · 24 bottles per box</p>
+
+            <div class="space-y-2 mb-8">
+              <div class="feature-chip"><div class="check-icon"><i data-lucide="check" style="width:10px;height:10px;color:var(--accent);"></i></div>24 Bottles Per Box</div>
+              <div class="feature-chip"><div class="check-icon"><i data-lucide="check" style="width:10px;height:10px;color:var(--accent);"></i></div>Hygienic Packaging</div>
+              <div class="feature-chip"><div class="check-icon"><i data-lucide="check" style="width:10px;height:10px;color:var(--accent);"></i></div>Fast Delivery</div>
+              <div class="feature-chip"><div class="check-icon"><i data-lucide="check" style="width:10px;height:10px;color:var(--accent);"></i></div>Easy Ordering via WhatsApp</div>
+            </div>
+
+            <button onclick="selectPack('Small', 10)" class="btn-outline w-full justify-center">Select Plan</button>
+          </div>
+
+          <!-- BIGGER Pack (was Premium) - Featured -->
+          <div class="pricing-card featured rounded-2xl p-8 anim-up anim-d3" style="transform:scale(1.03);">
+            <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);">
+              <div style="background:linear-gradient(135deg,#4a90e2,#2563eb);color:white;font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;padding:0.35rem 1.25rem;border-radius:0 0 0.6rem 0.6rem;">
+                Most Popular
+              </div>
+            </div>
+
+            <div class="mb-1 mt-3">
+              <span style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent);font-weight:600;">Best Value</span>
+            </div>
+            <h3 id="premium-title" style="font-family:'Lexend',sans-serif;font-size:2rem;font-weight:700;color:#f5f7fa;margin-bottom:0.25rem;">Bigger</h3>
+            <p style="font-size:0.8rem;color:rgba(245,247,250,0.4);margin-bottom:1.75rem;">Great for offices & growing families</p>
+
+            <div class="divider"></div>
+
+            <div class="flex items-baseline gap-2 mb-1">
+              <span class="size-badge">₹20</span>
+              <span style="color:rgba(245,247,250,0.4);font-size:0.85rem;">/bottle</span>
+            </div>
+            <p style="font-size:0.78rem;color:rgba(245,247,250,0.35);margin-bottom:2rem;">₹480 total · 24 bottles per box</p>
+
+            <div class="space-y-2 mb-8">
+              <div class="feature-chip"><div class="check-icon" style="background:rgba(74,144,226,0.2);border-color:rgba(74,144,226,0.5);"><i data-lucide="check" style="width:10px;height:10px;color:var(--accent);"></i></div>24 Bottles Per Box</div>
+              <div class="feature-chip"><div class="check-icon" style="background:rgba(74,144,226,0.2);border-color:rgba(74,144,226,0.5);"><i data-lucide="check" style="width:10px;height:10px;color:var(--accent);"></i></div>Quality Filtered Water</div>
+              <div class="feature-chip"><div class="check-icon" style="background:rgba(74,144,226,0.2);border-color:rgba(74,144,226,0.5);"><i data-lucide="check" style="width:10px;height:10px;color:var(--accent);"></i></div>Priority Delivery</div>
+              <div class="feature-chip"><div class="check-icon" style="background:rgba(74,144,226,0.2);border-color:rgba(74,144,226,0.5);"><i data-lucide="check" style="width:10px;height:10px;color:var(--accent);"></i></div>Reliable 24/7 Service</div>
+            </div>
+
+            <button onclick="selectPack('Bigger', 20)" class="btn-primary pulse-btn w-full justify-center">Select Plan</button>
+          </div>
+
+          <!-- BIGGEST Pack (was Luxury) -->
+          <div class="pricing-card rounded-2xl p-8 anim-up anim-d4">
+            <div class="mb-1">
+              <span style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(245,247,250,0.4);font-weight:500;">Premium Choice</span>
+            </div>
+            <h3 id="luxury-title" style="font-family:'Lexend',sans-serif;font-size:2rem;font-weight:700;color:#f5f7fa;margin-bottom:0.25rem;">Biggest</h3>
+            <p style="font-size:0.8rem;color:rgba(245,247,250,0.4);margin-bottom:1.75rem;">Ideal for bulk buyers & enterprises</p>
+
+            <div class="divider"></div>
+
+            <div class="flex items-baseline gap-2 mb-1">
+              <span class="size-badge">₹50</span>
+              <span style="color:rgba(245,247,250,0.4);font-size:0.85rem;">/bottle</span>
+            </div>
+            <p style="font-size:0.78rem;color:rgba(245,247,250,0.35);margin-bottom:2rem;">₹1200 total · 24 bottles per box</p>
+
+            <div class="space-y-2 mb-8">
+              <div class="feature-chip"><div class="check-icon"><i data-lucide="check" style="width:10px;height:10px;color:var(--accent);"></i></div>24 Bottles Per Box</div>
+              <div class="feature-chip"><div class="check-icon"><i data-lucide="check" style="width:10px;height:10px;color:var(--accent);"></i></div>Maximum Purity Guaranteed</div>
+              <div class="feature-chip"><div class="check-icon"><i data-lucide="check" style="width:10px;height:10px;color:var(--accent);"></i></div>Same-Day Delivery</div>
+              <div class="feature-chip"><div class="check-icon"><i data-lucide="check" style="width:10px;height:10px;color:var(--accent);"></i></div>Premium Packaging</div>
+            </div>
+
+            <button onclick="selectPack('Biggest', 50)" class="btn-outline w-full justify-center">Select Plan</button>
+          </div>
+
+        </div>
+
+        <!-- All plans note -->
+        <p class="text-center mt-8" style="font-size:0.78rem;color:rgba(245,247,250,0.3);letter-spacing:0.05em;">All plans include WhatsApp-based ordering · Ahmedabad area delivery</p>
+      </div>
+    </section>
+
+    <!-- ORDER SECTION -->
+    <section id="order" class="relative w-full py-28 px-6 z-10">
+      <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-10">
+          <div class="section-label mb-5 max-w-xs mx-auto">Place Your Order</div>
+          <h2 style="font-family:'Lexend',sans-serif;font-weight:700;font-size:2.2rem;color:#f5f7fa;letter-spacing:-0.01em;">Ready to Order?</h2>
+          <p style="color:rgba(245,247,250,0.45);margin-top:0.75rem;font-size:0.9rem;">Fill in your details and we'll connect you on WhatsApp instantly.</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-8 md:p-10" style="border-color:rgba(255,255,255,0.07);">
+          <form id="orderForm" onsubmit="handleOrderSubmit(event)" class="space-y-5">
+
+            <div>
+              <label style="display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(245,247,250,0.5);margin-bottom:0.6rem;">Select Pack</label>
+              <select id="bottleType" name="bottleType" class="form-input" required>
+                <option value="">Choose a pack...</option>
+                <option value="Small - ₹10/bottle">Small Pack – ₹10 per bottle</option>
+                <option value="Bigger - ₹20/bottle">Bigger Pack – ₹20 per bottle</option>
+                <option value="Biggest - ₹50/bottle">Biggest Pack – ₹50 per bottle</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(245,247,250,0.5);margin-bottom:0.6rem;">Number of Boxes</label>
+              <input type="number" id="numBoxes" name="numBoxes" class="form-input" placeholder="Enter quantity (e.g. 2)" min="1" max="100" required>
+            </div>
+
+            <div>
+              <label style="display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(245,247,250,0.5);margin-bottom:0.6rem;">Full Name</label>
+              <input type="text" id="fullName" name="fullName" class="form-input" placeholder="Your full name" required>
+            </div>
+
+            <div>
+              <label style="display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(245,247,250,0.5);margin-bottom:0.6rem;">Mobile Number</label>
+              <input type="tel" id="mobileNum" name="mobileNum" class="form-input" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+            </div>
+
+            <div>
+              <label style="display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(245,247,250,0.5);margin-bottom:0.6rem;">Delivery Address</label>
+              <textarea id="address" name="address" class="form-input" placeholder="Full delivery address (Ahmedabad area)" rows="3" required></textarea>
+            </div>
+
+            <div class="divider"></div>
+
+            <button type="submit" class="btn-whatsapp pulse-btn w-full justify-center" style="font-size:0.95rem;padding:1rem 2rem;">
+              <i data-lucide="send" style="width:16px;height:16px;"></i>
+              Send Order via WhatsApp
+            </button>
+
+            <p class="text-center" style="font-size:0.72rem;color:rgba(245,247,250,0.3);">You'll be redirected to WhatsApp to confirm your order</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / FOOTER -->
+    <section id="contact" class="relative w-full py-16 px-6 z-10" style="border-top:1px solid rgba(255,255,255,0.05);">
+      <div class="max-w-6xl mx-auto">
+
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8 mb-12">
+          <a href="tel:+919327802068" class="glass-card rounded-xl px-8 py-5 flex items-center gap-4 text-center group" style="text-decoration:none;min-width:220px;">
+            <div style="width:44px;height:44px;border-radius:50%;background:rgba(74,144,226,0.12);border:1px solid rgba(74,144,226,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i data-lucide="phone" style="width:18px;height:18px;color:var(--accent);"></i>
+            </div>
+            <div>
+              <p style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.2em;color:rgba(245,247,250,0.4);margin-bottom:0.25rem;">Call Us</p>
+              <p style="color:#f5f7fa;font-size:0.9rem;font-weight:600;">+91 9327 802 068</p>
+            </div>
+          </a>
+
+          <a href="https://wa.me/919327802068" target="_blank" rel="noopener noreferrer" class="glass-card rounded-xl px-8 py-5 flex items-center gap-4" style="text-decoration:none;min-width:220px;">
+            <div style="width:44px;height:44px;border-radius:50%;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i data-lucide="message-circle" style="width:18px;height:18px;color:#25D366;"></i>
+            </div>
+            <div>
+              <p style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.2em;color:rgba(245,247,250,0.4);margin-bottom:0.25rem;">WhatsApp</p>
+              <p style="color:#f5f7fa;font-size:0.9rem;font-weight:600;">Chat with us</p>
+            </div>
+          </a>
+        </div>
+
+        <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.07),transparent);margin-bottom:2rem;"></div>
+
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:0.18em;color:var(--accent);">INDWATER</span>
+          <p id="footer-text" style="font-size:0.72rem;color:rgba(245,247,250,0.25);letter-spacing:0.08em;text-align:center;">© 2025 IndWater — Premium Drinking Water Supplier. All rights reserved.</p>
+          <div class="flex items-center gap-4">
+            <a href="https://wa.me/919327802068" target="_blank" rel="noopener noreferrer" style="color:rgba(245,247,250,0.3);transition:color 0.3s;" onmouseover="this.style.color='#25D366'" onmouseout="this.style.color='rgba(245,247,250,0.3)'">
+              <i data-lucide="phone" style="width:17px;height:17px;"></i>
+            </a>
+            <a href="#" style="color:rgba(245,247,250,0.3);transition:color 0.3s;" onmouseover="this.style.color='#E1306C'" onmouseout="this.style.color='rgba(245,247,250,0.3)'">
+              <i data-lucide="instagram" style="width:17px;height:17px;"></i>
+            </a>
+            <a href="#" style="color:rgba(245,247,250,0.3);transition:color 0.3s;" onmouseover="this.style.color='#1877F2'" onmouseout="this.style.color='rgba(245,247,250,0.3)'">
+              <i data-lucide="facebook" style="width:17px;height:17px;"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast-msg"></div>
+
+  <script>
     function selectPack(packName, pricePerBottle) {
-      selectedPack = { name: packName, price: pricePerBottle };
       document.getElementById('bottleType').value = `${packName} - ₹${pricePerBottle}/bottle`;
-      document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' });
+      const orderSection = document.getElementById('order');
+      orderSection.scrollIntoView({ behavior: 'smooth' });
+
+      // Briefly highlight the select
+      const sel = document.getElementById('bottleType');
+      sel.style.borderColor = 'rgba(74,144,226,0.6)';
+      sel.style.boxShadow = '0 0 20px rgba(74,144,226,0.2)';
+      setTimeout(() => {
+        sel.style.borderColor = '';
+        sel.style.boxShadow = '';
+      }, 1500);
     }
 
     function handleOrderSubmit(e) {
       e.preventDefault();
-      
+
       const bottleType = document.getElementById('bottleType').value;
       const numBoxes = document.getElementById('numBoxes').value;
       const fullName = document.getElementById('fullName').value;
@@ -365,153 +690,38 @@
       const address = document.getElementById('address').value;
 
       if (!bottleType || !numBoxes || !fullName || !mobileNum || !address) {
-        showToast('Please fill all fields', 'error');
-        return;
+        showToast('Please fill all fields', 'error'); return;
       }
-
       if (mobileNum.length !== 10 || isNaN(mobileNum)) {
-        showToast('Please enter valid 10-digit mobile number', 'error');
-        return;
+        showToast('Enter a valid 10-digit mobile number', 'error'); return;
       }
 
       const totalBottles = parseInt(numBoxes) * 24;
-      const message = `Hello IndWater! I would like to place an order:\n\n📦 Pack: ${bottleType}\n📊 Number of Boxes: ${numBoxes} (${totalBottles} bottles)\n👤 Name: ${fullName}\n📱 Mobile: ${mobileNum}\n📍 Address: ${address}`;
-      
-      // Create WhatsApp link
-      const encodedMsg = encodeURIComponent(message);
-      const whatsappUrl = `https://wa.me/919327802068?text=${encodedMsg}`;
-      
-      // Open WhatsApp in new tab
+      const message = `Hello IndWater! I'd like to place an order:\n\n📦 Pack: ${bottleType}\n📊 Boxes: ${numBoxes} (${totalBottles} bottles)\n👤 Name: ${fullName}\n📱 Mobile: ${mobileNum}\n📍 Address: ${address}`;
+      const whatsappUrl = `https://wa.me/919327802068?text=${encodeURIComponent(message)}`;
+
       window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-      
-      // Show success toast
-      showToast('Redirecting to WhatsApp... ✓', 'success');
-      
-      // Reset form after a short delay
+      showToast('Opening WhatsApp... ✓', 'success');
+
       setTimeout(() => {
         document.getElementById('orderForm').reset();
-        document.getElementById('bottleType').value = '';
       }, 1500);
     }
 
     function showToast(message, type = 'success') {
       const toast = document.getElementById('toast');
       toast.textContent = message;
-      toast.className = 'toast-msg show';
-      if (type === 'error') {
-        toast.style.background = 'rgba(239, 68, 68, 0.9)';
-      } else {
-        toast.style.background = 'rgba(37, 211, 102, 0.9)';
-      }
-      
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 2500);
+      toast.style.background = type === 'error'
+        ? 'rgba(239,68,68,0.92)'
+        : 'rgba(37,211,102,0.92)';
+      toast.style.boxShadow = type === 'error'
+        ? '0 8px 30px rgba(239,68,68,0.3)'
+        : '0 8px 30px rgba(37,211,102,0.3)';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2800);
     }
-
-    // Element SDK
-    const defaultConfig = {
-      background_color: 'linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%)',
-      text_color: '#f5f7fa',
-      primary_action_color: '#4a90e2',
-      secondary_action_color: 'rgba(245,247,250,0.5)',
-      font_family: 'Montserrat',
-      font_size: 16,
-      hero_title: 'Experience Pure<br><span style="color:#4a90e2;">Bottled Perfection</span>',
-      hero_subtitle: 'Premium packaged drinking water delivered straight to your doorstep. Choose your plan, place your order, and enjoy pristine hydration.',
-      daily_title: 'The Daily Pack',
-      premium_title: 'The Premium Pack',
-      luxury_title: 'The Luxury Pack',
-      whatsapp_text: 'Order via WhatsApp',
-      footer_text: '© 2025 IndWater - Premium Drinking Water Supplier. All rights reserved.'
-    };
-
-    async function onConfigChange(config) {
-      const text = config.text_color || defaultConfig.text_color;
-      const accent = config.primary_action_color || defaultConfig.primary_action_color;
-      const secondary = config.secondary_action_color || defaultConfig.secondary_action_color;
-      const font = config.font_family || defaultConfig.font_family;
-      const baseSize = config.font_size || defaultConfig.font_size;
-
-      document.body.style.color = text;
-      document.body.style.fontFamily = `${font}, Montserrat, sans-serif`;
-
-      // Hero
-      const heroEl = document.getElementById('hero-title');
-      if (heroEl) {
-        heroEl.innerHTML = config.hero_title || defaultConfig.hero_title;
-        heroEl.style.color = text;
-        heroEl.style.fontSize = `${baseSize * 2}px`;
-      }
-      const subEl = document.getElementById('hero-subtitle');
-      if (subEl) {
-        subEl.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
-        subEl.style.color = secondary;
-        subEl.style.fontSize = `${baseSize}px`;
-      }
-
-      // Pricing titles
-      const dailyTitle = document.getElementById('daily-title');
-      if (dailyTitle) {
-        dailyTitle.textContent = config.daily_title || defaultConfig.daily_title;
-        dailyTitle.style.color = text;
-      }
-      const premiumTitle = document.getElementById('premium-title');
-      if (premiumTitle) {
-        premiumTitle.textContent = config.premium_title || defaultConfig.premium_title;
-        premiumTitle.style.color = text;
-      }
-      const luxuryTitle = document.getElementById('luxury-title');
-      if (luxuryTitle) {
-        luxuryTitle.textContent = config.luxury_title || defaultConfig.luxury_title;
-        luxuryTitle.style.color = text;
-      }
-
-      const collectionTitle = document.getElementById('collection-title');
-      if (collectionTitle) {
-        collectionTitle.textContent = 'Flexible Pricing Plans';
-        collectionTitle.style.color = text;
-        collectionTitle.style.fontSize = `${baseSize * 1.5}px`;
-      }
-
-      const footerEl = document.getElementById('footer-text');
-      if (footerEl) {
-        footerEl.textContent = config.footer_text || defaultConfig.footer_text;
-        footerEl.style.color = secondary;
-      }
-    }
-
-    window.elementSdk.init({
-      defaultConfig,
-      onConfigChange,
-      mapToCapabilities: (config) => ({
-        recolorables: [
-          { get: () => config.primary_action_color || defaultConfig.primary_action_color, set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); } },
-          { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
-          { get: () => config.secondary_action_color || defaultConfig.secondary_action_color, set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); } }
-        ],
-        borderables: [],
-        fontEditable: {
-          get: () => config.font_family || defaultConfig.font_family,
-          set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
-        },
-        fontSizeable: {
-          get: () => config.font_size || defaultConfig.font_size,
-          set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
-        }
-      }),
-      mapToEditPanelValues: (config) => new Map([
-        ['hero_title', config.hero_title || defaultConfig.hero_title],
-        ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
-        ['daily_title', config.daily_title || defaultConfig.daily_title],
-        ['premium_title', config.premium_title || defaultConfig.premium_title],
-        ['luxury_title', config.luxury_title || defaultConfig.luxury_title],
-        ['whatsapp_text', config.whatsapp_text || defaultConfig.whatsapp_text],
-        ['footer_text', config.footer_text || defaultConfig.footer_text]
-      ])
-    });
 
     lucide.createIcons();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e59583906f87937',t:'MTc3NTA2NDg2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
