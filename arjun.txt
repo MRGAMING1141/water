@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shree Shakti Borewell Drilling &amp; Services | 30 Years Experience | Ahmedabad</title>
+<meta name="description" content="Professional borewell drilling from 0 to 1200 feet, test hole drilling, borewell repair &amp; maintenance, and construction-site borewell services in Ahmedabad. 30 years of practical drilling experience.">
+<meta name="keywords" content="borewell drilling Ahmedabad, test hole drilling, borewell repair, construction site borewell, groundwater drilling, 1200 feet borewell">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#050f1c;
+    --navy-900:#0a1f36;
+    --navy-800:#0f2c4a;
+    --navy-700:#163a5f;
+    --rust-500:#b5652e;
+    --rust-400:#d17f42;
+    --water-400:#4fa8c9;
+    --water-300:#7ec4dd;
+    --sand-100:#f3efe6;
+    --sand-050:#f9f7f2;
+    --stone-300:#c7d2dc;
+    --stone-400:#93a4b8;
+    --ink:#0a1526;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--sand-050);
+    color:var(--ink);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.01em;line-height:1.1;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--rust-500);
+    font-weight:600;
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:16px;
+  }
+  .eyebrow::before{content:'';width:26px;height:2px;background:var(--rust-500);display:inline-block;}
+
+  /* ===== Scroll Depth Rail (signature element) ===== */
+  #depth-rail{
+    position:fixed;
+    right:22px;
+    top:50%;
+    transform:translateY(-50%);
+    height:60vh;
+    width:56px;
+    z-index:500;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    pointer-events:none;
+  }
+  #depth-rail .rail-line{
+    position:relative;
+    width:2px;
+    flex:1;
+    background:rgba(255,255,255,0.18);
+  }
+  #depth-rail .rail-fill{
+    position:absolute;
+    top:0;left:0;width:100%;
+    background:linear-gradient(180deg,var(--rust-400),var(--rust-500));
+    height:0%;
+    transition:height .1s linear;
+  }
+  #depth-rail .bit{
+    position:absolute;
+    left:50%;
+    top:0%;
+    transform:translate(-50%,-50%);
+    width:16px;height:16px;
+    transition:top .1s linear;
+  }
+  #depth-rail .bit svg{width:100%;height:100%;}
+  #depth-rail .ft-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--sand-100);
+    background:var(--navy-950);
+    border:1px solid var(--rust-500);
+    padding:2px 6px;
+    border-radius:2px;
+    margin-top:8px;
+    white-space:nowrap;
+  }
+  @media (max-width:980px){ #depth-rail{display:none;} }
+
+  /* ===== Nav ===== */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:600;
+    background:rgba(5,15,28,0.72);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    transition:background .3s;
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;max-width:1200px;margin:0 auto;
+  }
+  .logo{
+    color:var(--sand-100);font-family:'Oswald',sans-serif;font-weight:600;
+    font-size:19px;letter-spacing:0.02em;display:flex;flex-direction:column;line-height:1.15;
+  }
+  .logo span{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--water-300);letter-spacing:0.14em;font-weight:500;text-transform:uppercase;}
+  .nav-links{display:flex;gap:34px;list-style:none;}
+  .nav-links a{color:var(--stone-300);font-size:14px;font-weight:500;letter-spacing:0.02em;transition:color .2s;position:relative;}
+  .nav-links a:hover{color:var(--sand-100);}
+  .nav-cta{
+    display:flex;gap:12px;
+  }
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px 26px;font-size:14px;font-weight:600;letter-spacing:0.03em;
+    border-radius:2px;border:1px solid transparent;cursor:pointer;
+    text-transform:uppercase;font-family:'Inter',sans-serif;
+    transition:all .25s ease;
+  }
+  .btn-primary{background:var(--rust-500);color:#fff;}
+  .btn-primary:hover{background:var(--rust-400);transform:translateY(-2px);box-shadow:0 8px 20px rgba(181,101,46,0.35);}
+  .btn-ghost{background:transparent;color:var(--sand-100);border-color:rgba(255,255,255,0.35);}
+  .btn-ghost:hover{border-color:var(--sand-100);background:rgba(255,255,255,0.06);}
+  .btn-sm{padding:9px 18px;font-size:12px;}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+  .hamburger span{width:24px;height:2px;background:var(--sand-100);}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;min-height:100vh;display:flex;align-items:flex-end;
+    background:#0a1a2c;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background-image:linear-gradient(180deg, rgba(5,12,22,0.55) 0%, rgba(6,16,29,0.75) 55%, var(--navy-950) 100%), url('https://images.unsplash.com/photo-1722183704200-e96339975ba4?q=80&w=2400&auto=format&fit=crop');
+    background-size:cover;background-position:center 35%;
+    filter:saturate(0.85) contrast(1.05);
+  }
+  .hero-bg::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(120deg, rgba(10,32,54,0.55), transparent 55%);
+  }
+  .hero-grid{
+    position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size:44px 44px;
+    mask-image:linear-gradient(180deg, black, transparent 70%);
+  }
+  .hero-inner{position:relative;z-index:2;width:100%;padding:180px 24px 90px;max-width:1200px;margin:0 auto;}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:10px;
+    background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.2);
+    padding:8px 16px;border-radius:2px;margin-bottom:28px;
+  }
+  .hero-badge .dot{width:8px;height:8px;background:var(--rust-400);border-radius:50%;box-shadow:0 0 0 4px rgba(209,127,66,0.2);}
+  .hero-badge span{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.1em;color:var(--sand-100);text-transform:uppercase;}
+  .hero h1{
+    color:var(--sand-100);font-size:clamp(38px,6.5vw,84px);font-weight:600;max-width:920px;
+    text-shadow:0 4px 30px rgba(0,0,0,0.4);
+  }
+  .hero h1 em{font-style:normal;color:var(--rust-400);}
+  .hero-sub{
+    margin-top:26px;font-size:clamp(15px,1.6vw,19px);color:var(--stone-300);
+    font-family:'IBM Plex Mono',monospace;letter-spacing:0.02em;
+    max-width:640px;
+  }
+  .hero-sub b{color:var(--water-300);font-weight:600;}
+  .hero-actions{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap;}
+  .scroll-cue{
+    position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;
+    color:var(--stone-300);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;
+  }
+  .scroll-cue .line{width:1px;height:34px;background:linear-gradient(180deg,var(--rust-400),transparent);animation:drop 1.8s infinite;}
+  @keyframes drop{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+  /* ===== Ticker ===== */
+  .ticker-strip{
+    background:var(--rust-500);overflow:hidden;white-space:nowrap;position:relative;z-index:3;
+    border-top:1px solid rgba(0,0,0,0.15);border-bottom:1px solid rgba(0,0,0,0.15);
+  }
+  .ticker-track{display:inline-flex;animation:scrollTicker 32s linear infinite;}
+  .ticker-track span{
+    display:inline-flex;align-items:center;gap:14px;
+    padding:12px 0;margin-right:14px;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;letter-spacing:0.08em;
+    text-transform:uppercase;color:#fff;
+  }
+  .ticker-track span::after{content:'◆';margin-left:14px;opacity:0.6;font-size:9px;}
+  @keyframes scrollTicker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  section{padding:120px 0;position:relative;}
+  .section-head{max-width:640px;margin-bottom:64px;}
+  .section-head h2{font-size:clamp(30px,4vw,48px);color:var(--navy-900);}
+  .section-head p{margin-top:18px;font-size:16px;color:#4d5b6a;max-width:560px;}
+  .light-on-dark .section-head h2{color:var(--sand-100);}
+  .light-on-dark .section-head p{color:var(--stone-300);}
+
+  /* ===== Services ===== */
+  .services{background:var(--sand-050);}
+  .service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(10,21,38,0.1);border:1px solid rgba(10,21,38,0.1);}
+  .service-card{
+    background:var(--sand-050);padding:44px 30px;position:relative;
+    transition:background .3s;
+  }
+  .service-card:hover{background:var(--navy-900);}
+  .service-card:hover h3,.service-card:hover p{color:var(--sand-100);}
+  .service-card:hover .service-num{color:rgba(255,255,255,0.15);}
+  .service-card:hover p{color:var(--stone-300);}
+  .service-num{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;color:rgba(10,21,38,0.25);
+    display:block;margin-bottom:30px;transition:color .3s;
+  }
+  .service-icon{width:46px;height:46px;margin-bottom:22px;color:var(--rust-500);}
+  .service-card h3{font-size:19px;color:var(--navy-900);margin-bottom:12px;transition:color .3s;}
+  .service-card p{font-size:14.5px;color:#5a6675;transition:color .3s;}
+  @media (max-width:980px){.service-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:600px){.service-grid{grid-template-columns:1fr;}}
+
+  /* ===== Why choose us ===== */
+  .why{background:var(--navy-950);color:var(--sand-100);
+    background-image:
+      radial-gradient(ellipse at top right, rgba(79,168,201,0.12), transparent 55%),
+      radial-gradient(ellipse at bottom left, rgba(181,101,46,0.1), transparent 55%);
+  }
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.08);}
+  .why-card{padding:46px 34px;background:var(--navy-950);}
+  .why-num{font-family:'IBM Plex Mono',monospace;font-size:52px;font-weight:600;color:var(--rust-400);display:block;line-height:1;}
+  .why-num sup{font-size:22px;top:-1.4em;}
+  .why-card h4{margin-top:18px;font-size:16px;color:var(--sand-100);letter-spacing:0.03em;}
+  .why-card p{margin-top:10px;font-size:13.5px;color:var(--stone-400);text-transform:none;font-family:'Inter',sans-serif;}
+  @media (max-width:900px){.why-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.why-grid{grid-template-columns:1fr;}}
+
+  /* ===== About ===== */
+  .about{background:var(--sand-100);}
+  .about-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:70px;align-items:center;}
+  .about-media{position:relative;}
+  .about-media img{width:100%;height:520px;object-fit:cover;filter:saturate(0.9);}
+  .about-media::before{
+    content:'';position:absolute;top:-18px;left:-18px;right:18px;bottom:18px;
+    border:2px solid var(--rust-500);z-index:-1;
+  }
+  .about-stat{
+    position:absolute;bottom:-28px;right:-28px;background:var(--navy-900);color:#fff;
+    padding:26px 30px;text-align:center;box-shadow:0 20px 40px rgba(10,21,38,0.25);
+  }
+  .about-stat .n{font-family:'IBM Plex Mono',monospace;font-size:38px;font-weight:600;color:var(--rust-400);}
+  .about-stat .l{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--stone-300);margin-top:4px;font-family:'Inter',sans-serif;}
+  .about-copy h2{font-size:clamp(28px,3.6vw,42px);color:var(--navy-900);margin-bottom:22px;}
+  .about-copy p{color:#42505f;font-size:15.5px;margin-bottom:16px;}
+  .about-list{margin-top:26px;display:flex;flex-direction:column;gap:14px;}
+  .about-list li{display:flex;gap:12px;align-items:flex-start;list-style:none;font-size:14.5px;color:#33414f;}
+  .about-list li svg{flex-shrink:0;width:18px;height:18px;color:var(--rust-500);margin-top:2px;}
+  @media (max-width:900px){.about-grid{grid-template-columns:1fr;}.about-stat{position:static;margin-top:-1px;display:inline-block;}}
+
+  /* ===== Process ===== */
+  .process{background:var(--sand-050);}
+  .process-line{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:20px;}
+  .process-line::before{
+    content:'';position:absolute;top:34px;left:0;right:0;height:2px;
+    background:repeating-linear-gradient(90deg, var(--navy-700) 0 10px, transparent 10px 18px);
+    z-index:0;
+  }
+  .stage{position:relative;z-index:1;}
+  .stage-mark{
+    width:68px;height:68px;border-radius:50%;background:var(--navy-900);color:var(--sand-100);
+    display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;
+    font-size:20px;font-weight:600;border:3px solid var(--sand-050);
+    box-shadow:0 0 0 2px var(--navy-900);
+  }
+  .stage-ft{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--rust-500);margin-top:14px;letter-spacing:0.08em;}
+  .stage h3{font-size:18px;margin-top:8px;color:var(--navy-900);}
+  .stage p{font-size:14px;color:#5a6675;margin-top:8px;}
+  @media (max-width:900px){.process-line{grid-template-columns:1fr 1fr;row-gap:50px;}.process-line::before{display:none;}}
+  @media (max-width:560px){.process-line{grid-template-columns:1fr;}}
+
+  /* ===== CTA band ===== */
+  .cta-band{
+    background:linear-gradient(120deg, var(--rust-500), #8f4a20);
+    padding:90px 0;position:relative;overflow:hidden;
+  }
+  .cta-band::before{
+    content:'';position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size:38px 38px;
+  }
+  .cta-inner{position:relative;text-align:center;max-width:720px;margin:0 auto;}
+  .cta-band h2{color:#fff;font-size:clamp(28px,4.2vw,46px);}
+  .cta-band p{color:rgba(255,255,255,0.85);margin-top:16px;font-size:15.5px;}
+  .cta-actions{display:flex;gap:16px;justify-content:center;margin-top:36px;flex-wrap:wrap;}
+  .cta-band .btn-ghost{border-color:rgba(255,255,255,0.6);}
+  .cta-band .btn-primary{background:var(--navy-950);}
+  .cta-band .btn-primary:hover{background:var(--navy-800);}
+
+  /* ===== Contact ===== */
+  .contact{background:var(--navy-950);color:var(--sand-100);}
+  .contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:70px;}
+  .info-item{display:flex;gap:16px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,0.1);}
+  .info-item svg{width:22px;height:22px;color:var(--rust-400);flex-shrink:0;}
+  .info-item .lbl{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--stone-400);}
+  .info-item .val{font-size:16px;margin-top:4px;color:var(--sand-100);}
+  .map-box{
+    margin-top:26px;height:200px;border:1px dashed rgba(255,255,255,0.25);
+    display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;
+    background:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size:20px 20px;color:var(--stone-400);font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:center;
+  }
+  .whatsapp-fixed{
+    position:fixed;bottom:26px;right:26px;z-index:700;
+    width:58px;height:58px;border-radius:50%;background:#25D366;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 10px 26px rgba(0,0,0,0.35);
+  }
+  .whatsapp-fixed svg{width:28px;height:28px;fill:#fff;}
+  .whatsapp-fixed{animation:pulseWA 2.6s infinite;}
+  @keyframes pulseWA{0%{box-shadow:0 0 0 0 rgba(37,211,102,0.5),0 10px 26px rgba(0,0,0,0.35);}70%{box-shadow:0 0 0 14px rgba(37,211,102,0),0 10px 26px rgba(0,0,0,0.35);}100%{box-shadow:0 0 0 0 rgba(37,211,102,0),0 10px 26px rgba(0,0,0,0.35);}}
+
+  form{display:flex;flex-direction:column;gap:16px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  input,textarea,select{
+    background:var(--navy-900);border:1px solid rgba(255,255,255,0.14);color:var(--sand-100);
+    padding:14px 16px;font-family:'Inter',sans-serif;font-size:14px;border-radius:2px;width:100%;
+  }
+  input::placeholder,textarea::placeholder{color:var(--stone-400);}
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--rust-400);outline-offset:1px;border-color:var(--rust-400);}
+  label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone-400);font-family:'IBM Plex Mono',monospace;margin-bottom:6px;display:block;}
+  @media (max-width:900px){.contact-grid{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}}
+
+  /* ===== Footer ===== */
+  footer{background:var(--navy-950);border-top:1px solid rgba(255,255,255,0.08);padding:56px 0 28px;}
+  .footer-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .footer-brand{max-width:340px;}
+  .footer-brand h3{color:var(--sand-100);font-size:20px;}
+  .footer-brand p{color:var(--stone-400);font-size:13.5px;margin-top:10px;text-transform:none;font-family:'Inter',sans-serif;}
+  .footer-links{display:flex;gap:40px;flex-wrap:wrap;}
+  .footer-links a{color:var(--stone-300);font-size:14px;display:block;margin-bottom:10px;}
+  .footer-links a:hover{color:var(--rust-400);}
+  .footer-col h5{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--stone-400);text-transform:uppercase;margin-bottom:14px;}
+  .footer-bottom{display:flex;justify-content:space-between;padding-top:24px;flex-wrap:wrap;gap:10px;color:var(--stone-400);font-size:12.5px;}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+    html{scroll-behavior:auto;}
+  }
+
+  @media (max-width:900px){
+    .nav-links,.nav-cta{display:none;}
+    .hamburger{display:flex;}
+  }
+  @media (max-width:900px){
+    .mobile-menu{
+      position:fixed;inset:0;background:var(--navy-950);z-index:900;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+      transform:translateX(100%);transition:transform .35s ease;
+    }
+    .mobile-menu.open{transform:translateX(0);}
+    .mobile-menu a{color:var(--sand-100);font-family:'Oswald',sans-serif;font-size:22px;text-transform:uppercase;}
+    .mobile-close{position:absolute;top:22px;right:24px;color:#fff;font-size:28px;background:none;border:none;cursor:pointer;}
+  }
+</style>
+</head>
+<body>
+
+<div id="depth-rail" aria-hidden="true">
+  <div class="rail-line">
+    <div class="rail-fill" id="railFill"></div>
+    <div class="bit" id="railBit">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L4 8v4l8 10 8-10V8L12 2z" fill="#d17f42"/></svg>
+    </div>
+  </div>
+  <div class="ft-label" id="railLabel">0 FT</div>
+</div>
+
+<header>
+  <nav>
+    <a href="#top" class="logo">SHREE SHAKTI <span>Borewell Drilling &amp; Services</span></a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="tel:+917984731938" class="btn btn-ghost btn-sm">Call Now</a>
+      <a href="#contact" class="btn btn-primary btn-sm">Free Enquiry</a>
+    </div>
+    <div class="hamburger" id="hamburgerBtn" role="button" aria-label="Open menu"><span></span><span></span><span></span></div>
+  </nav>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#why">Why Us</a>
+  <a href="#contact">Contact</a>
+  <a href="tel:+917984731938" class="btn btn-primary" style="margin-top:16px;">Call Now</a>
+</div>
+
+<main id="top">
+
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-inner">
+      <div class="hero-badge"><span class="dot"></span><span>30+ Years of Drilling Experience</span></div>
+      <h1>Professional Borewell<br>Drilling &amp; <em>Services</em></h1>
+      <p class="hero-sub">30 Years of Experience &nbsp;•&nbsp; Drilling Up to <b>1200 Feet</b> &nbsp;•&nbsp; Reliable Borewell Solutions for Homes, Farms &amp; Construction Sites</p>
+      <div class="hero-actions">
+        <a href="tel:+917984731938" class="btn btn-primary">Call Us Now</a>
+        <a href="#contact" class="btn btn-ghost">Get a Free Enquiry</a>
+      </div>
+    </div>
+    <div class="scroll-cue"><span>0 Ft</span><span class="line"></span></div>
+  </section>
+
+  <div class="ticker-strip">
+    <div class="ticker-track">
+      <span>Borewell Drilling 0–1200 Ft</span><span>Test Hole Drilling</span><span>Borewell Repair &amp; Maintenance</span><span>Construction Site Services</span><span>30 Years Experience</span><span>Ahmedabad &amp; Nearby Regions</span>
+      <span>Borewell Drilling 0–1200 Ft</span><span>Test Hole Drilling</span><span>Borewell Repair &amp; Maintenance</span><span>Construction Site Services</span><span>30 Years Experience</span><span>Ahmedabad &amp; Nearby Regions</span>
+    </div>
+  </div>
+
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">What We Do</div>
+        <h2>Drilling &amp; Borewell Services</h2>
+        <p>Four decades-tested capabilities covering everything from first test hole to long-term borewell upkeep.</p>
+      </div>
+    </div>
+    <div class="service-grid">
+      <div class="service-card reveal">
+        <span class="service-num mono">01</span>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 4v12M24 16l-8 8v8h16v-8l-8-8z"/><path d="M16 32l-3 10h22l-3-10"/><path d="M20 42h8"/></svg>
+        <h3>Borewell Drilling</h3>
+        <p>Professional borewell drilling services from 0 to 1200 feet, using equipment suited to your site's geology.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-num mono">02</span>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="18" r="8"/><path d="M24 26v18M18 44h12"/><path d="M20 15l3 3 5-6"/></svg>
+        <h3>Test Hole Drilling</h3>
+        <p>Test hole drilling to check groundwater availability before committing to a full borewell installation.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-num mono">03</span>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M31 8l9 9-5 5-9-9z"/><path d="M30 13l-18 18v5h5l18-18"/><path d="M8 40l4-4"/></svg>
+        <h3>Borewell Repairing</h3>
+        <p>Repair and maintenance services for existing borewells, restoring flow and extending working life.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-num mono">04</span>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 40h36"/><path d="M12 40V20l10-8 10 8v20"/><path d="M22 40v-10h4v10"/><path d="M32 40V14l6-4"/></svg>
+        <h3>Construction Site Services</h3>
+        <p>Reliable borewell drilling solutions for construction projects, builders, and large-scale sites.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="why light-on-dark" id="why">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Why Choose Us</div>
+        <h2>Built On Three Decades On Site</h2>
+        <p>Every rig we run and every crew we send out carries the same standard we set thirty years ago.</p>
+      </div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal"><span class="why-num mono">30<sup>+</sup></span><h4>Years Experience</h4><p>Practical, on-ground drilling experience since day one.</p></div>
+      <div class="why-card reveal"><span class="why-num mono">0–1200</span><h4>Ft Drilling Range</h4><p>Equipped to drill from shallow test holes to full-depth borewells.</p></div>
+      <div class="why-card reveal"><span class="why-num mono">100<sup>%</sup></span><h4>Experienced Team</h4><p>Skilled operators and crew trained on real sites, not just manuals.</p></div>
+      <div class="why-card reveal"><span class="why-num mono">A+</span><h4>Professional Service</h4><p>Clear communication and disciplined site work from start to finish.</p></div>
+      <div class="why-card reveal"><span class="why-num mono">24/7</span><h4>Reliable Work</h4><p>We show up when we say we will, and finish what we start.</p></div>
+      <div class="why-card reveal"><span class="why-num mono">XL</span><h4>Construction Site Expertise</h4><p>Trusted by builders for site-ready borewell solutions at scale.</p></div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <div class="about-media reveal">
+        <img src="https://images.unsplash.com/photo-1780389098001-e641e50aeebd?q=80&w=1400&auto=format&fit=crop" alt="Heavy drilling machinery on an active construction site">
+        <div class="about-stat"><div class="n mono">30</div><div class="l">Years in Service</div></div>
+      </div>
+      <div class="about-copy reveal">
+        <div class="eyebrow">About Us</div>
+        <h2>Thirty Years Below The Surface</h2>
+        <p>For thirty years, we have drilled, tested, and maintained borewells across residential plots, farmland, commercial sites, and active construction projects. What started as hands-on fieldwork has grown into a dependable service built entirely on practical experience — not shortcuts.</p>
+        <p>We understand soil, rock, and water table behaviour well enough to know when a site needs a test hole first, and when it's ready for a full 1200-foot borewell. That judgment, earned over three decades, is what keeps clients calling us back.</p>
+        <ul class="about-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg>Residential, agricultural &amp; commercial drilling</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg>Groundwater assessment before you commit</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg>Full repair &amp; maintenance support after installation</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg>Dedicated crews for construction-site timelines</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="process">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Our Process</div>
+        <h2>From Enquiry To Support</h2>
+        <p>A straightforward four-stage process, the same one we've followed on every site for thirty years.</p>
+      </div>
+      <div class="process-line">
+        <div class="stage reveal">
+          <div class="stage-mark">01</div>
+          <div class="stage-ft">STAGE · GROUND LEVEL</div>
+          <h3>Enquiry</h3>
+          <p>Contact us and explain your borewell requirement — residential, farm, or construction site.</p>
+        </div>
+        <div class="stage reveal">
+          <div class="stage-mark">02</div>
+          <div class="stage-ft">STAGE · SITE SURVEY</div>
+          <h3>Site Assessment</h3>
+          <p>We visit and assess the site to understand soil conditions and drilling requirements.</p>
+        </div>
+        <div class="stage reveal">
+          <div class="stage-mark">03</div>
+          <div class="stage-ft">STAGE · 0–1200 FT</div>
+          <h3>Drilling</h3>
+          <p>Professional borewell drilling carried out with equipment suited to the depth and terrain.</p>
+        </div>
+        <div class="stage reveal">
+          <div class="stage-mark">04</div>
+          <div class="stage-ft">STAGE · ONGOING</div>
+          <h3>Service &amp; Support</h3>
+          <p>Borewell repair, maintenance, and related support whenever it's needed after installation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap cta-inner reveal">
+      <h2>Need A Borewell? Let Our 30 Years<br>Of Experience Work For You.</h2>
+      <p>Talk to us today — from a quick test hole to a full 1200 ft borewell, we've handled it before.</p>
+      <div class="cta-actions">
+        <a href="tel:+917984731938" class="btn btn-primary">Call Now</a>
+        <a href="#contact" class="btn btn-ghost">Send Enquiry</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="section-head light-on-dark reveal">
+        <div class="eyebrow">Contact</div>
+        <h2>Get In Touch</h2>
+        <p>Reach out for an enquiry, a site visit, or emergency borewell repair support.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="reveal">
+          <div class="info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <div><div class="lbl">Phone</div><div class="val">+91 79847 31938</div></div>
+          </div>
+          <div class="info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            <div><div class="lbl">WhatsApp</div><div class="val">+91 79847 31938</div></div>
+          </div>
+          <div class="info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div><div class="lbl">Address</div><div class="val">Isanpur, Ahmedabad, Gujarat</div></div>
+          </div>
+          <a href="https://wa.me/917984731938" class="btn btn-primary" style="margin-top:26px;width:100%;">Chat on WhatsApp</a>
+          <div class="map-box">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Google Maps Embed — Isanpur, Ahmedabad
+          </div>
+        </div>
+        <form class="reveal" onsubmit="return false;">
+          <div class="form-row">
+            <div><label>Full Name</label><input type="text" placeholder="Your name" required></div>
+            <div><label>Phone Number</label><input type="tel" placeholder="+91" required></div>
+          </div>
+          <div><label>Service Required</label>
+            <select>
+              <option>Borewell Drilling</option>
+              <option>Test Hole Drilling</option>
+              <option>Borewell Repairing</option>
+              <option>Construction Site Services</option>
+            </select>
+          </div>
+          <div><label>Site Location</label><input type="text" placeholder="Area / City"></div>
+          <div><label>Message</label><textarea rows="4" placeholder="Tell us about your requirement"></textarea></div>
+          <button type="submit" class="btn btn-primary" style="margin-top:6px;">Send Enquiry</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Shree Shakti Borewell Drilling &amp; Services</h3>
+        <p>Professional borewell solutions with 30 years of experience — drilling, testing, repair, and construction-site services.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Navigate</h5>
+        <div class="footer-links">
+          <div><a href="#home">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#why">Why Us</a><a href="#contact">Contact</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Shree Shakti Borewell Drilling &amp; Services. All rights reserved.</span>
+      <span>Isanpur, Ahmedabad, Gujarat</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/917984731938" class="whatsapp-fixed" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M20.5 3.5A11 11 0 003.6 17L2 22l5.2-1.5A11 11 0 1020.5 3.5zM12 20a8.4 8.4 0 01-4.3-1.2l-.3-.2-3 .9.9-2.9-.2-.3A8.4 8.4 0 1112 20zm4.6-6.3c-.3-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.6.1a6.8 6.8 0 01-2-1.2 7.4 7.4 0 01-1.4-1.7c-.1-.2 0-.4.1-.5s.3-.3.4-.5a.6.6 0 00.1-.5c0-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-1 2.2 5.1 5.1 0 001.1 2.7 11.6 11.6 0 004.4 3.9c.6.3 1.1.4 1.5.5a3.6 3.6 0 001.6.1 2.7 2.7 0 001.7-1.2 2.2 2.2 0 00.2-1.2c-.1-.1-.3-.2-.6-.3z"/></svg>
+</a>
+
+<script>
+  // year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // mobile menu
+  const hamburger = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+  hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  // depth rail scroll progress mapped to 0-1200 ft
+  const railFill = document.getElementById('railFill');
+  const railBit = document.getElementById('railBit');
+  const railLabel = document.getElementById('railLabel');
+  function updateRail(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = Math.min(1, Math.max(0, scrollTop / docHeight));
+    railFill.style.height = (pct*100) + '%';
+    railBit.style.top = (pct*100) + '%';
+    const ft = Math.round(pct*1200);
+    railLabel.textContent = ft + ' FT';
+  }
+  window.addEventListener('scroll', updateRail, {passive:true});
+  window.addEventListener('resize', updateRail);
+  updateRail();
+
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.12});
+  revealEls.forEach(el => io.observe(el));
+
+  // header background on scroll
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 40){ header.style.background = 'rgba(5,15,28,0.92)'; }
+    else { header.style.background = 'rgba(5,15,28,0.72)'; }
+  }, {passive:true});
+</script>
+</body>
+</html>
